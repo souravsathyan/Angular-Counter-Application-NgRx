@@ -9,19 +9,23 @@ import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './shared/store/counter.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { CustomCounterComponent } from './component/custom-counter/custom-counter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CounterButtonComponent,
-    CounterDisplayComponent
+    CounterDisplayComponent,
+    CustomCounterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({counter:counterReducer}),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
