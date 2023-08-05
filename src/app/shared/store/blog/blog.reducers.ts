@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { BlogState } from './blog.state';
-import { addBlog, deleteBlog, loadBlog, loadBlogSuccess, updateBlog } from './blog.actions';
+import { addBlog, deleteBlog, loadBlog, loadBlogFail, loadBlogSuccess, updateBlog } from './blog.actions';
 import { BlogModel } from './blog.model';
+import { state } from '@angular/animations';
 
 // reducer that accept the current state and the new state that passed through the action
 const _blogReducer = createReducer(
@@ -14,7 +15,15 @@ const _blogReducer = createReducer(
   on(loadBlogSuccess, (state, action)=>{
     return {
       ...state,
-      blogList : [...action.blogList]
+      blogList : [...action.blogList],
+      ErrorMessage : ''
+    }
+  }),
+  on(loadBlogFail, (state,action)=>{
+    return {
+      ...state,
+      blogList:[],
+      ErrorMessage : action.Errortext
     }
   }),
   on(addBlog, (state, action)=>{

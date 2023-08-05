@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { MasterService } from "../../master.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { LOAD_BLOG, loadBlogSuccess } from "./blog.actions";
-import { EMPTY, catchError, exhaustMap, map} from "rxjs";
+import { LOAD_BLOG, loadBlogFail, loadBlogSuccess } from "./blog.actions";
+import { EMPTY, catchError, exhaustMap, map, of} from "rxjs";
 
 @Injectable()
 export class BlogEffects {
@@ -20,7 +20,7 @@ export class BlogEffects {
                     map((data)=>{
                         return loadBlogSuccess({blogList: data})
                     }),
-                    catchError(()=> EMPTY)
+                    catchError((_error)=> of(loadBlogFail({Errortext : _error.message})) )
                 )
             })
         )
