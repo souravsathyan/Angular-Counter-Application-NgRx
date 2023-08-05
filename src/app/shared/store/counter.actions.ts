@@ -11,3 +11,7 @@ export const reset = createAction ('reset')
 
 //customIncrement
 export const customIncrement = createAction("customIncrement", props < { value : number, action : string } >())
+
+// changing name
+export const changeName = createAction("changeName", props < { name : string } >())
+

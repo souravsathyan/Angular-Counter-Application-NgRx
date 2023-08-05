@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,21 +11,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CustomCounterComponent } from './component/custom-counter/custom-counter.component';
 import { FormsModule } from '@angular/forms';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HomeComponent } from './component/home/home.component';
+import { CounterComponent } from './component/counter/counter.component';
+import { BlogComponent } from './component/blog/blog.component';
+import { MenuHeaderComponent } from './component/menu-header/menu-header.component';
+import { blogReducer } from './shared/store/blog/blog.reducers';
+import { AppState } from './shared/store/global/app.state';
+import { AddBlogComponent } from './component/add-blog/add-blog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CounterButtonComponent,
     CounterDisplayComponent,
-    CustomCounterComponent
+    CustomCounterComponent,
+    HomeComponent,
+    CounterComponent,
+    BlogComponent,
+    MenuHeaderComponent,
+    AddBlogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({counter:counterReducer}),
+    StoreModule.forRoot(AppState),
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [],
   bootstrap: [AppComponent]
