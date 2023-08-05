@@ -6,6 +6,7 @@ import { getBlog } from 'src/app/shared/store/blog/blog.selectors';
 import { AppStateModel } from 'src/app/shared/store/global/appState.model';
 import { AddBlogComponent } from '../add-blog/add-blog.component';
 import { timeInterval } from 'rxjs';
+import { deleteBlog } from 'src/app/shared/store/blog/blog.actions';
 
 @Component({
   selector: 'app-blog',
@@ -44,6 +45,12 @@ export class BlogComponent implements OnInit{
 
   editBlog(id:any){
     this.openPopup(id,'Edit Blog',true)
+  }
+
+  removeBlog(id:any){
+    if(confirm("Are you sure")){
+      this.store.dispatch(deleteBlog({id:id}))
+    }
   }
 
 }
