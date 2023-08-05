@@ -19,6 +19,9 @@ import { MenuHeaderComponent } from './component/menu-header/menu-header.compone
 import { blogReducer } from './shared/store/blog/blog.reducers';
 import { AppState } from './shared/store/global/app.state';
 import { AddBlogComponent } from './component/add-blog/add-blog.component';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { BlogEffects } from './shared/store/blog/blog.effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { AddBlogComponent } from './component/add-blog/add-blog.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([]),
+    HttpClientModule,
+    EffectsModule.forRoot([BlogEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
