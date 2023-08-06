@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { BlogModel } from 'src/app/shared/store/blog/blog.model';
-import { getBlog } from 'src/app/shared/store/blog/blog.selectors';
+import { BlogModel, Blogs } from 'src/app/shared/store/blog/blog.model';
+import { getBlog, getBlogInfo } from 'src/app/shared/store/blog/blog.selectors';
 import { AppStateModel } from 'src/app/shared/store/global/appState.model';
 import { AddBlogComponent } from '../add-blog/add-blog.component';
 import { timeInterval } from 'rxjs';
@@ -21,11 +21,13 @@ export class BlogComponent implements OnInit{
   ){}
 
   blogList !: BlogModel[]
+  blogInfo !: Blogs
 
   ngOnInit(): void {
     this.store.dispatch(loadBlog())
-    this.store.select(getBlog).subscribe(item => {
-      this.blogList = item
+    this.store.select(getBlogInfo).subscribe(item => {
+      this.blogInfo = item
+      // this.blogList = item
     })
   }
 
